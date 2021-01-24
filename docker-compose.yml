@@ -40,6 +40,20 @@ services:
     depends_on:
       - nginx-proxy
       - letsencrypt
+  mccactusdevs:
+    image: nginx
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - ./mc.cactusdevs.tk:/usr/share/nginx/html:ro
+    environment:
+      - VIRTUAL_HOST=mc.cactusdevs.tk
+      - LETSENCRYPT_HOST=mc.cactusdevs.tk
+      - LETSENCRYPT_EMAIL=me@jesuscm.dev
+    depends_on:
+      - nginx-proxy
+      - letsencrypt
 volumes:
   certs:
   html:
