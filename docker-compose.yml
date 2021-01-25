@@ -75,8 +75,8 @@ services:
     expose:
       - 9000
     environment:
-      MINIO_ACCESS_KEY:
-      MINIO_SECRET_KEY:
+      MINIO_ACCESS_KEY: MINIOCACTUSDEVSACCESS
+      MINIO_SECRET_KEY: MINIOCACTUSDEVSACCESSSECRET
       MINIO_DOMAIN: s3.cactusdevs.tk
       VIRTUAL_HOST: s3.cactusdevs.tk
       VIRTUAL_PORT: 9000
