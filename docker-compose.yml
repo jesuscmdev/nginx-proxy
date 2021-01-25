@@ -46,7 +46,7 @@ services:
     image: wordpress:php7.2-apache
     environment:
       WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: mccactusdevs
+      WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: mccactusdevs01
       WORDPRESS_DB_NAME: mccactusdevs
       VIRTUAL_HOST: mc.cactusdevs.tk
