@@ -43,7 +43,7 @@ services:
 
   # WORDPRESS
   wordpress:
-    image: wordpress:php7.2-apache
+    image: wordpress:php7.4-apache
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: root
