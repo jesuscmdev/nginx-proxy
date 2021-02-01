@@ -102,7 +102,6 @@ services:
     volumes:
       - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
-      - /etc/localtime:/etc/localtime:ro
       - ./nginx/htmlnginx/html/.well-known:/opt/www/.well-known
       - /root/docker/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
 
