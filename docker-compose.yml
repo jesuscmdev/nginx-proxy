@@ -84,6 +84,30 @@ services:
       LETSENCRYPT_EMAIL: me@jesuscm.dev
     volumes:
       - ./minio-data:/data
+  # POSTE
+  poste:
+    image: analogic/poste.io
+    restart: always
+    ports:
+      - "25:25"
+      - "110:110"
+      - "143:143"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+      - "995:995"
+    expose:
+      - "80"
+      - "443"
+    volumes:
+      - ./poste/mail-data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - ./nginx/htmlnginx/html/.well-known:/opt/www/.well-known
+    environment:
+      - LETSENCRYPT_EMAIL=team@cactusdevs.tk
+      - LETSENCRYPT_HOST=mail.cactusdevs.tk
+      - VIRTUAL_HOST=mail.cactusdevs.tk
+      - HTTPS=ON
 volumes:
   certs:
   html:
