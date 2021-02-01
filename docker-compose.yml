@@ -113,8 +113,5 @@ services:
 volumes:
   certs:
   html:
-    driver: local-persist
-    driver_opts:
-      mountpoint: /root/docker/volumes/html
   vhostd:
   confd:
