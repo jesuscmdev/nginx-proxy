@@ -87,7 +87,7 @@ services:
   # POSTE
   poste:
     image: analogic/poste.io
-    restart: always
+    restart: unless-stopped
     ports:
       - "25:25"
       - "110:110"
@@ -100,15 +100,22 @@ services:
       - "80"
       - "443"
     volumes:
+      - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
       - /etc/localtime:/etc/localtime:ro
       - ./nginx/htmlnginx/html/.well-known:/opt/www/.well-known
+      - /root/docker/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
+      - /root/docker/volumes/html/.well-known:/opt/www/.well-known
     environment:
       - LETSENCRYPT_EMAIL=team@cactusdevs.tk
       - LETSENCRYPT_HOST=mail.cactusdevs.tk
       - VIRTUAL_HOST=mail.cactusdevs.tk
-      - HTTPS=ON
+      - HTTPS=OFF
 volumes:
   certs:
   html:
+    driver: local-persist
+    driver_opts:
+      mountpoint: /root/docker/volumes/html
   vhostd:
+  confd:
