@@ -10,9 +10,9 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./certs:/etc/nginx/certs:ro
-      - ./vhostd:/etc/nginx/vhost.d
-      - ./html:/usr/share/nginx/html
+      - ./nginxproxy/certs:/etc/nginx/certs:ro
+      - ./nginxproxy/vhostd:/etc/nginx/vhost.d
+      - ./nginxproxy/html:/usr/share/nginx/html
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
 
@@ -23,9 +23,9 @@ services:
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
-      - ./certs:/etc/nginx/certs:rw
-      - ./vhostd:/etc/nginx/vhost.d
-      - ./html:/usr/share/nginx/html
+      - ./nginxproxy/certs:/etc/nginx/certs:rw
+      - ./nginxproxy/vhostd:/etc/nginx/vhost.d
+      - ./nginxproxy/html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   www:
@@ -35,7 +35,7 @@ services:
     expose:
       - "80"
     volumes:
-      - ./www:/usr/share/nginx/html:ro
+      - ./demosite:/usr/share/nginx/html:ro
     environment:
       - VIRTUAL_HOST=mc.jesuscm.dev
       - LETSENCRYPT_HOST=mc.jesuscm.dev
@@ -89,7 +89,7 @@ services:
   #     - ./minio-data:/data
   # POSTE
   poste:
-    image: analogic/poste.io:latest
+    image: analogic/poste.io
     restart: unless-stopped
     container_name: mailserver
     ports:
@@ -104,11 +104,10 @@ services:
     expose:
       - "80"
       - "443"
-
     volumes:
       - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
-      - ./nginx/htmlnginx/html/.well-known:/opt/www/.well-known
+      - ./nginxproxy/html/.well-known:/opt/www/.well-known
       - ./poste/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
 
     environment:
@@ -117,7 +116,7 @@ services:
       - VIRTUAL_HOST=mail.jesuscm.dev
       - HTTPS=ON
 volumes:
-  certs:
-  html:
+  nginxproxy:
+  poste:
   vhostd:
   confd:
