@@ -86,8 +86,9 @@ services:
   #     - ./minio-data:/data
   # POSTE
   poste:
-    image: analogic/poste.io
+    image: analogic/poste.io:latest
     restart: unless-stopped
+    container_name: mailserver
     ports:
       - "25:25"
       - "110:110"
@@ -96,9 +97,10 @@ services:
       - "587:587"
       - "993:993"
       - "995:995"
-    expose:
-      - "80"
-      - "443"
+      - "4190:4190"
+    # expose:
+    #   - "80"
+    #   - "443"
     volumes:
       - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
