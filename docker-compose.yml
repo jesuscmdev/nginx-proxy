@@ -65,7 +65,7 @@ services:
   # # MYSQL
   mysql:
     image: mysql:8.0.13
-    command: --default-authentication-plugin=mysql_native_password
+    # command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: db_demo
       MYSQL_ROOT_PASSWORD: root
