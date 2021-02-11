@@ -34,56 +34,56 @@ services:
     volumes:
       - ./www:/usr/share/nginx/html:ro
     environment:
-      - VIRTUAL_HOST=cactusdevs.tk,www.cactusdevs.tk
-      - LETSENCRYPT_HOST=cactusdevs.tk,www.cactusdevs.tk
+      - VIRTUAL_HOST=mc.jesuscm.dev
+      - LETSENCRYPT_HOST=mc.jesuscm.dev
       - LETSENCRYPT_EMAIL=me@jesuscm.dev
     depends_on:
       - nginx-proxy
       - letsencrypt
 
-  # WORDPRESS
-  wordpress:
-    image: wordpress:php7.4-apache
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: mccactusdevs01
-      WORDPRESS_DB_NAME: mccactusdevs
-      VIRTUAL_HOST: mc.cactusdevs.tk
-      LETSENCRYPT_HOST: mc.cactusdevs.tk
-      LETSENCRYPT_EMAIL: me@jesuscm.dev
-    links:
-      - mysql:mysql
-    volumes:
-      - ./wordpress:/var/www/html
-    depends_on:
-      - nginx-proxy
-      - letsencrypt
-  # MYSQL
-  mysql:
-    image: mysql:8.0.13
-    command: --default-authentication-plugin=mysql_native_password
-    environment:
-      MYSQL_DATABASE: mccactusdevs
-      MYSQL_ROOT_PASSWORD: mccactusdevs01
-    volumes:
-      - ./mysql:/var/lib/mysql
-  #MINIO
-  minio:
-    image: minio/minio
-    command: server /data
-    expose:
-      - 9000
-    environment:
-      MINIO_ACCESS_KEY: MINIOCACTUSDEVSACCESS
-      MINIO_SECRET_KEY: MINIOCACTUSDEVSACCESSSECRET
-      MINIO_DOMAIN: s3.cactusdevs.tk
-      VIRTUAL_HOST: s3.cactusdevs.tk
-      VIRTUAL_PORT: 9000
-      LETSENCRYPT_HOST: s3.cactusdevs.tk
-      LETSENCRYPT_EMAIL: me@jesuscm.dev
-    volumes:
-      - ./minio-data:/data
+  # # WORDPRESS
+  # wordpress:
+  #   image: wordpress:php7.4-apache
+  #   environment:
+  #     WORDPRESS_DB_HOST: mysql
+  #     WORDPRESS_DB_USER: root
+  #     WORDPRESS_DB_PASSWORD: mccactusdevs01
+  #     WORDPRESS_DB_NAME: mccactusdevs
+  #     VIRTUAL_HOST: mc.cactusdevs.tk
+  #     LETSENCRYPT_HOST: mc.cactusdevs.tk
+  #     LETSENCRYPT_EMAIL: me@jesuscm.dev
+  #   links:
+  #     - mysql:mysql
+  #   volumes:
+  #     - ./wordpress:/var/www/html
+  #   depends_on:
+  #     - nginx-proxy
+  #     - letsencrypt
+  # # MYSQL
+  # mysql:
+  #   image: mysql:8.0.13
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     MYSQL_DATABASE: mccactusdevs
+  #     MYSQL_ROOT_PASSWORD: mccactusdevs01
+  #   volumes:
+  #     - ./mysql:/var/lib/mysql
+  # #MINIO
+  # minio:
+  #   image: minio/minio
+  #   command: server /data
+  #   expose:
+  #     - 9000
+  #   environment:
+  #     MINIO_ACCESS_KEY: MINIOCACTUSDEVSACCESS
+  #     MINIO_SECRET_KEY: MINIOCACTUSDEVSACCESSSECRET
+  #     MINIO_DOMAIN: s3.cactusdevs.tk
+  #     VIRTUAL_HOST: s3.cactusdevs.tk
+  #     VIRTUAL_PORT: 9000
+  #     LETSENCRYPT_HOST: s3.cactusdevs.tk
+  #     LETSENCRYPT_EMAIL: me@jesuscm.dev
+  #   volumes:
+  #     - ./minio-data:/data
   # POSTE
   poste:
     image: analogic/poste.io
@@ -106,9 +106,9 @@ services:
       - /root/docker/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
 
     environment:
-      - LETSENCRYPT_EMAIL=team@cactusdevs.tk
-      - LETSENCRYPT_HOST=mail.cactusdevs.tk
-      - VIRTUAL_HOST=mail.cactusdevs.tk
+      - LETSENCRYPT_EMAIL=me@jesuscm.dev
+      - LETSENCRYPT_HOST=mail.jesuscm.dev
+      - VIRTUAL_HOST=mail.jesuscm.dev
       - HTTPS=OFF
 volumes:
   certs:
