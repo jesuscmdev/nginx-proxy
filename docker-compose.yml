@@ -1,5 +1,4 @@
 version: "3"
-
 services:
   nginx-proxy:
     container_name: nginxproxy
@@ -45,40 +44,40 @@ services:
       - letsencrypt
 
   # # WORDPRESS
-  wordpress:
-    image: wordpress:php7.4-apache
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: root
-      WORDPRESS_DB_NAME: db_demo
-      VIRTUAL_HOST: 1.jesuscm.dev
-      LETSENCRYPT_HOST: 1.jesuscm.dev
-      LETSENCRYPT_EMAIL: me@jesuscm.dev
-    links:
-      - mysql:mysql
-    volumes:
-      - ./wordpress:/var/www/html
-    depends_on:
-      - nginx-proxy
-      - letsencrypt
-  # # MYSQL
-  mysql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_DATABASE: db_demo
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./mysql:/var/lib/mysql
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-  #MINIO
-  minio:
+  # wordpress:
+  #   image: wordpress:php7.4-apache
+  #   environment:
+  #     WORDPRESS_DB_HOST: mysql
+  #     WORDPRESS_DB_USER: root
+  #     WORDPRESS_DB_PASSWORD: root
+  #     WORDPRESS_DB_NAME: db_demo
+  #     VIRTUAL_HOST: 1.jesuscm.dev
+  #     LETSENCRYPT_HOST: 1.jesuscm.dev
+  #     LETSENCRYPT_EMAIL: me@jesuscm.dev
+  #   links:
+  #     - mysql:mysql
+  #   volumes:
+  #     - ./wordpress:/var/www/html
+  #   depends_on:
+  #     - nginx-proxy
+  #     - letsencrypt
+  # # # MYSQL
+  # mysql:
+  #   image: mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   restart: always
+  #   environment:
+  #     MYSQL_DATABASE: db_demo
+  #     MYSQL_ROOT_PASSWORD: root
+  #   volumes:
+  #     - ./mysql:/var/lib/mysql
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  # #MINIO
+  # minio:
     image: minio/minio
     command: server /data
     expose:
