@@ -1,7 +1,6 @@
 version: "3"
 services:
   nginx-proxy:
-    container_name: nginxproxy
     image: jwilder/nginx-proxy
     restart: always
     ports:
@@ -18,7 +17,6 @@ services:
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
-    container_name: letsencrypt
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
