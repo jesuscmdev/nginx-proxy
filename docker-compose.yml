@@ -64,13 +64,19 @@ services:
       - letsencrypt
   # # MYSQL
   mysql:
-    image: mysql:8.0.13
-    # command: --default-authentication-plugin=mysql_native_password
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
       MYSQL_DATABASE: db_demo
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   #MINIO
   minio:
     image: minio/minio
