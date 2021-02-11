@@ -105,7 +105,7 @@ services:
       - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
       - ./nginx/htmlnginx/html/.well-known:/opt/www/.well-known
-      - /root/docker/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
+      - ./poste/mail/etc/spamassassin/local.cf:/etc/spamassassin/local.cf
 
     environment:
       - LETSENCRYPT_EMAIL=me@jesuscm.dev
