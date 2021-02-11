@@ -64,15 +64,42 @@ services:
       - nginx-proxy
       - letsencrypt
   # # MYSQL
+  # mysql:
+  #   container_name: mysql
+  #   image: mysql:8.0.13
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   environment:
+  #     MYSQL_DATABASE: demowp
+  #     MYSQL_ROOT_PASSWORD: jesuscm01
+  #   volumes:
+  #     - ./mysql:/var/lib/mysql
   mysql:
-    container_name: mysql
     image: mysql:8.0.13
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    # command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: demowp
       MYSQL_ROOT_PASSWORD: jesuscm01
+    restart: always
+    expose:
+      - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
+      - ./mysql/:/etc/mysql/conf.d
+      - ./host:/shared
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    expose:
+      - "8080:80"
+    environment:
+      LETSENCRYPT_HOST: 1.jesuscm.dev
+      LETSENCRYPT_EMAIL: me@jesuscm.dev
+      VIRTUAL_PORT: 8080
+      PMA_HOST: mysql
   #MINIO
   minio:
     image: minio/minio
