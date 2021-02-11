@@ -45,48 +45,48 @@ services:
       - letsencrypt
 
   # # WORDPRESS
-  # wordpress:
-  #   image: wordpress:php7.4-apache
-  #   environment:
-  #     WORDPRESS_DB_HOST: mysql
-  #     WORDPRESS_DB_USER: root
-  #     WORDPRESS_DB_PASSWORD: mccactusdevs01
-  #     WORDPRESS_DB_NAME: mccactusdevs
-  #     VIRTUAL_HOST: mc.cactusdevs.tk
-  #     LETSENCRYPT_HOST: mc.cactusdevs.tk
-  #     LETSENCRYPT_EMAIL: me@jesuscm.dev
-  #   links:
-  #     - mysql:mysql
-  #   volumes:
-  #     - ./wordpress:/var/www/html
-  #   depends_on:
-  #     - nginx-proxy
-  #     - letsencrypt
+  wordpress:
+    image: wordpress:php7.4-apache
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: jesuscm01
+      WORDPRESS_DB_NAME: demowp
+      VIRTUAL_HOST: 1.jesuscm.dev
+      LETSENCRYPT_HOST: 1.jesuscm.dev
+      LETSENCRYPT_EMAIL: me@jesuscm.dev
+    links:
+      - mysql:mysql
+    volumes:
+      - ./demowp/:/var/www/html
+    depends_on:
+      - nginx-proxy
+      - letsencrypt
   # # MYSQL
-  # mysql:
-  #   image: mysql:8.0.13
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   environment:
-  #     MYSQL_DATABASE: mccactusdevs
-  #     MYSQL_ROOT_PASSWORD: mccactusdevs01
-  #   volumes:
-  #     - ./mysql:/var/lib/mysql
-  # #MINIO
-  # minio:
-  #   image: minio/minio
-  #   command: server /data
-  #   expose:
-  #     - 9000
-  #   environment:
-  #     MINIO_ACCESS_KEY: MINIOCACTUSDEVSACCESS
-  #     MINIO_SECRET_KEY: MINIOCACTUSDEVSACCESSSECRET
-  #     MINIO_DOMAIN: s3.cactusdevs.tk
-  #     VIRTUAL_HOST: s3.cactusdevs.tk
-  #     VIRTUAL_PORT: 9000
-  #     LETSENCRYPT_HOST: s3.cactusdevs.tk
-  #     LETSENCRYPT_EMAIL: me@jesuscm.dev
-  #   volumes:
-  #     - ./minio-data:/data
+  mysql:
+    image: mysql:8.0.13
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: demowp
+      MYSQL_ROOT_PASSWORD: jesuscm01
+    volumes:
+      - ./mysql:/var/lib/mysql
+  #MINIO
+  minio:
+    image: minio/minio
+    command: server /data
+    expose:
+      - 9000
+    environment:
+      MINIO_ACCESS_KEY: MINIOCACTUSDEVSACCESS
+      MINIO_SECRET_KEY: MINIOCACTUSDEVSACCESSSECRET
+      MINIO_DOMAIN: s3.jesuscm.dev
+      VIRTUAL_HOST: s3.jesuscm.dev
+      VIRTUAL_PORT: 9000
+      LETSENCRYPT_HOST: s3.jesuscm.dev
+      LETSENCRYPT_EMAIL: me@jesuscm.dev
+    volumes:
+      - ./minio-data:/data
   # POSTE
   poste:
     image: analogic/poste.io
