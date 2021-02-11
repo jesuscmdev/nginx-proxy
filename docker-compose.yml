@@ -50,15 +50,15 @@ services:
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: jesuscm01
-      WORDPRESS_DB_NAME: demowp
+      WORDPRESS_DB_PASSWORD: root
+      WORDPRESS_DB_NAME: db_demo
       VIRTUAL_HOST: 1.jesuscm.dev
       LETSENCRYPT_HOST: 1.jesuscm.dev
       LETSENCRYPT_EMAIL: me@jesuscm.dev
     links:
       - mysql:mysql
     volumes:
-      - ./demowp/:/var/www/html
+      - ./wordpress:/var/www/html
     depends_on:
       - nginx-proxy
       - letsencrypt
@@ -67,8 +67,8 @@ services:
     image: mysql:8.0.13
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_DATABASE: demowp
-      MYSQL_ROOT_PASSWORD: jesuscm01
+      MYSQL_DATABASE: db_demo
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql:/var/lib/mysql
   #MINIO
