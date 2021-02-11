@@ -2,6 +2,7 @@ version: "3"
 
 services:
   nginx-proxy:
+    container_name: nginxproxy
     image: jwilder/nginx-proxy
     restart: always
     ports:
@@ -18,6 +19,7 @@ services:
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
+    container_name: letsencrypt
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
@@ -29,6 +31,7 @@ services:
   www:
     image: nginx
     restart: always
+    container_name: demosite
     expose:
       - "80"
     volumes:
@@ -98,9 +101,10 @@ services:
       - "993:993"
       - "995:995"
       - "4190:4190"
-    # expose:
-    #   - "80"
-    #   - "443"
+    expose:
+      - "80"
+      - "443"
+
     volumes:
       - /usr/share/zoneinfo/America/Mexico_City:/etc/localtime:ro
       - ./poste/mail-data:/data
